@@ -60,6 +60,7 @@ class HostInfo {
     status;
     formHash;
     message;
+    reward;
 
     constructor(name, url,header) {
         this.name = name;
@@ -150,7 +151,8 @@ async function getCheckinInfo(host) {
             let rank = $('#qiandaobtnnum').val();// 签到排名
             let info = " 本次签到奖励： " + reward + " 个币； 已连续签到： " + days + " 天; 今日排名： " + rank + " 位； 签到总天数： " + allDays + " 天；";
             host.message = host.message + info;
-            console.log(host.name, info)
+            host.reward = reward;
+            console.log(host.name, host.message, host.reward)
         })
         .catch((error) => {
             host.message = "获取签到信息出错！" + error;
@@ -241,13 +243,13 @@ async function start() {
         }
         let sj = new HostInfo("4K视界", sjUrl,SJheaders);
         await getFormHash(sj);
-        status += sj.name + ": ";
+        status += "SJ" + ":";
         if (sj.status) {
-            status += "签到成功！";
+            status += sj.reward + "K币！";
         } else {
-            status += "签到失败！";
+            status += "失败！";
         }
-        message += "* " + sj.name + ": " + sj.message;
+        message += "* " + sj.name + ": " + sj.message + "<br>";
     }
     if (needCheck.indexOf("hao4k") > -1) {
         if (!checkIn) {
@@ -257,13 +259,13 @@ async function start() {
         }
         let hao4k = new HostInfo("hao4K", hao4kUrl,headers);
         await getFormHash(hao4k);
-        status += hao4k.name + ": ";
+        status += "4K" + ":";
         if (hao4k.status) {
-            status += "签到成功！";
+            status += hao4k.reward + "H币！";
         } else {
-            status += "签到失败！";
+            status += "失败！";
         }
-        message += "* " + hao4k.name + ": " + hao4k.message;
+        message += "* " + hao4k.name + ": " + hao4k.message + "<br>";
     }
     console.log(status, message);
     pushNotice(status, message);
