@@ -235,22 +235,7 @@ async function start() {
     let checkIn = false;
     console.log("配置的打卡的服务", needCheckHost);
     const needCheck = needCheckHost ? needCheckHost : "hao4k";
-    if (needCheck.indexOf("4ksj") > -1) {
-        if (!checkIn) {
-            checkIn = true;
-            status = "";
-            message = "";
-        }
-        let sj = new HostInfo("4K视界", sjUrl,SJheaders);
-        await getFormHash(sj);
-        status += "SJ" + ":";
-        if (sj.status) {
-            status += sj.reward + "K币！";
-        } else {
-            status += "失败！";
-        }
-        message += "* " + sj.name + ": " + sj.message + "<br>";
-    }
+    
     if (needCheck.indexOf("hao4k") > -1) {
         if (!checkIn) {
             checkIn = true;
@@ -267,6 +252,24 @@ async function start() {
         }
         message += "* " + hao4k.name + ": " + hao4k.message + "<br>";
     }
+    
+    if (needCheck.indexOf("4ksj") > -1) {
+        if (!checkIn) {
+            checkIn = true;
+            status = "";
+            message = "";
+        }
+        let sj = new HostInfo("4K视界", sjUrl,SJheaders);
+        await getFormHash(sj);
+        status += "SJ" + ":";
+        if (sj.status) {
+            status += sj.reward + "K币！";
+        } else {
+            status += "失败！";
+        }
+        message += "* " + sj.name + ": " + sj.message + "<br>";
+    }
+    
     console.log(status, message);
     pushNotice(status, message);
 }
