@@ -34,12 +34,12 @@ let cookieSJ = process.env["SJCOOKIE"];
 
 
 const sjUrl =
-    "https://www.4ksj.com/plugin.php?id=k_misign:sign&mobile=2";
+    "https://www.4ksj.com//k_misign-sign.html";
 const hao4kUrl =
-    "https://www.hao4k.cn/plugin.php?id=k_misign:sign&mobile=2";
+    "https://www.hao4k.cn/qiandao/";
 
 const userAgent =
-    "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1";
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36";
 
 const headers = {
     cookie: cookie ?? "",
