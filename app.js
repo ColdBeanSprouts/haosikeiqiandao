@@ -34,7 +34,7 @@ let cookieSJ = process.env["SJCOOKIE"];
 
 
 const sjUrl =
-    "https://www.4ksj.com//k_misign-sign.html";
+    "https://www.4ksj.com/qiandao/";
 const hao4kUrl =
     "https://www.hao4k.cn/qiandao/";
 
@@ -84,7 +84,7 @@ async function getFormHash(host) {
             if (userName === '') {
                 console.log("cookie失效！");
                 host.status = false;
-                host.message = "cookie失效！";
+                host.message = "https://www.4ksj.com/qiandao/";
             } else {
                 console.log(host.name, "获取用户信息成功！");
                 formHash = $('#scbar_form input').eq(1).val();
