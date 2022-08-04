@@ -81,17 +81,13 @@ async function getFormHash(host) {
             const $ = cheerio.load(gb);
             let formHash = '';
             const userName = $('#mumucms_username').text();
-            if (userName === '') {
-                console.log("cookie失效！");
-                host.status = false;
-                host.message = "https://www.4ksj.com/qiandao/";
-            } else {
+
                 console.log(host.name, "获取用户信息成功！");
                 formHash = $('#scbar_form input').eq(1).val();
                 host.status = true;
                 host.formHash = formHash;
                 await checkin(host);
-            }
+
         })
         .catch((error) => {
             host.status = false;
