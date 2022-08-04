@@ -81,7 +81,7 @@ async function getFormHash(host) {
             const $ = cheerio.load(gb);
             let formHash = '';
             const userName = $('#mumucms_username').text();
-            if (0) {
+            if (userName === '') {
                 console.log("cookie失效！");
                 host.status = false;
                 host.message = "cookie失效！";
