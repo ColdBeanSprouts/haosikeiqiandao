@@ -81,13 +81,17 @@ async function getFormHash(host) {
             const $ = cheerio.load(gb);
             let formHash = '';
             const userName = $('#mumucms_username').text();
-
+            if (0) {
+                console.log("cookie失效！");
+                host.status = false;
+                host.message = "cookie失效！";
+            } else {
                 console.log(host.name, "获取用户信息成功！");
                 formHash = $('#scbar_form input').eq(1).val();
                 host.status = true;
                 host.formHash = formHash;
                 await checkin(host);
-
+            }
         })
         .catch((error) => {
             host.status = false;
@@ -98,7 +102,7 @@ async function getFormHash(host) {
 
 async function checkin(host) {
     const checkInUrl =
-        host.url + "?mod=sign&operation=qiandao&formhash=" + host.formHash + "&format=empty&inajax=1&ajaxtarget=JD_sign";
+        host.url + "?mod=sign&operation=qiandao&formhash=" + host.formHash + "&format=empty&inajax=1&ajaxtarget=";
         let headers= host.header;
     await axios
         .get(checkInUrl, {
