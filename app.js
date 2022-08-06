@@ -100,6 +100,38 @@ async function getFormHash(host) {
         });
 }
 
+async function getFormHashSJ(host) {
+    let headers= host.header;
+    await axios
+        .get(host.url, {
+            headers,
+            responseType: "arraybuffer",
+        })
+        .then(async (response) => {
+            const gb = iconv.decode(response.data, "gb2312");
+            const $ = cheerio.load(gb);
+            let formHash = '';
+            const userName = $('#mumucms_username').text();
+            if (0) {
+                console.log("cookie失效！");
+                host.status = false;
+                host.message = "cookie失效！";
+            } else {
+                console.log(host.name, "获取用户信息成功！");
+                formHash = $('#scbar_form input').eq(1).val();
+                host.status = true;
+                host.formHash = 54946771;
+                await checkin(host);
+            }
+        })
+        .catch((error) => {
+            host.status = false;
+            host.message = "获取formhash出错" + error;
+            console.log(host.name, error);
+        });
+}
+
+
 async function checkin(host) {
     const checkInUrl =
         host.url + "?mod=sign&operation=qiandao&formhash=" + host.formHash + "&format=empty&inajax=1&ajaxtarget=";
@@ -260,7 +292,7 @@ async function start() {
             message = "";
         }
         let sj = new HostInfo("4K视界", sjUrl,SJheaders);
-        await getFormHash(sj);
+        await getFormHashSJ(sj);
         status += "SJ" + ":";
         if (sj.status) {
             status += sj.reward + "K币！";
