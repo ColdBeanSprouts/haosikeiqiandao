@@ -110,7 +110,7 @@ async function getFormHashSJ(host) {
         .then(async (response) => {
             const gb = iconv.decode(response.data, "gb2312");
             const $ = cheerio.load(gb);
-            let formHash = '';
+            let formHash = "1c3f4d87";
             const userName = $('#mumucms_username').text();
             if (0) {
                 console.log("cookie失效！");
@@ -118,7 +118,7 @@ async function getFormHashSJ(host) {
                 host.message = "cookie失效！";
             } else {
                 console.log(host.name, "获取用户信息成功！");
-                formHash = $('#scbar_form input').eq(1).val();
+                
                 host.status = true;
                 host.formHash = "1c3f4d87";
                 await checkin(host);
