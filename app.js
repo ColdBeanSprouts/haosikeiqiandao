@@ -102,7 +102,7 @@ async function getFormHash(host) {
 
 async function checkin(host) {
     const checkInUrl =
-        host.url + "?mod=sign&operation=qiandao&formhash=" + host.formHash + "&format=empty&inajax=1&ajaxtarget=";
+        host.url + "?mod=sign&operation=qiandao&formhash=" + "f4b02e7d" + "&format=empty&inajax=1&ajaxtarget=JD_Sign";
         let headers= host.header;
     await axios
         .get(checkInUrl, {
