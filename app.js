@@ -77,7 +77,7 @@ async function getFormHash(host) {
             responseType: "arraybuffer",
         })
         .then(async (response) => {
-            const gb = iconv.decode(response.data, "gb2312");
+            const gb = iconv.decode(response.data, "GBK");
             const $ = cheerio.load(gb);
             let formHash = '';
             const userName = $('#mumucms_username').text();
@@ -102,7 +102,7 @@ async function getFormHash(host) {
 
 async function checkin(host) {
     const checkInUrl =
-        host.url + "?mod=sign&operation=qiandao&formhash=" + "f4b02e7d" + "&format=empty&inajax=1&ajaxtarget=JD_Sign";
+        host.url + "?mod=sign&operation=qiandao&formhash=" + "f4b02e7d" + "&format=empty&inajax=1&ajaxtarget=JD_sign";
         let headers= host.header;
     await axios
         .get(checkInUrl, {
@@ -143,7 +143,7 @@ async function getCheckinInfo(host) {
             responseType: "arraybuffer",
         })
         .then((response) => {
-            const gb = iconv.decode(response.data, "gb2312");
+            const gb = iconv.decode(response.data, "GBK");
             const $ = cheerio.load(gb);
             let days = $('#lxdays').val(); //连续签到天数
             let reward = $('#lxreward').val(); // 签到奖励
