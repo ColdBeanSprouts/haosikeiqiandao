@@ -39,7 +39,7 @@ const hao4kUrl =
     "https://www.hao4k.cn/qiandao/";
 
 const userAgent =
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36";
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36 Edg/99.0.1150.39";
 
 const headers = {
     cookie: cookie ?? "",
@@ -77,7 +77,7 @@ async function getFormHash(host) {
             responseType: "arraybuffer",
         })
         .then(async (response) => {
-            const gb = iconv.decode(response.data, "GBK");
+            const gb = iconv.decode(response.data, "gb2312");
             const $ = cheerio.load(gb);
             let formHash = '';
             const userName = $('#mumucms_username').text();
@@ -102,7 +102,7 @@ async function getFormHash(host) {
 
 async function checkin(host) {
     const checkInUrl =
-        host.url + "?mod=sign&operation=qiandao&formhash=" + "f4b02e7d" + "&format=empty&inajax=1&ajaxtarget=JD_sign";
+        host.url + "?mod=sign&operation=qiandao&formhash=" + host.formHash + "&format=empty&inajax=1&ajaxtarget=";
         let headers= host.header;
     await axios
         .get(checkInUrl, {
@@ -143,7 +143,7 @@ async function getCheckinInfo(host) {
             responseType: "arraybuffer",
         })
         .then((response) => {
-            const gb = iconv.decode(response.data, "GBK");
+            const gb = iconv.decode(response.data, "gb2312");
             const $ = cheerio.load(gb);
             let days = $('#lxdays').val(); //连续签到天数
             let reward = $('#lxreward').val(); // 签到奖励
