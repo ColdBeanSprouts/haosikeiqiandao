@@ -120,7 +120,7 @@ async function getFormHashSJ(host) {
                 console.log(host.name, "获取用户信息成功！");
                 formHash = $('#scbar_form input').eq(1).val();
                 host.status = true;
-                host.formHash = 54946771;
+                host.formHash = "1c3f4d87";
                 await checkin(host);
             }
         })
