@@ -238,7 +238,7 @@ async function getCheckinInfoSJ(host) {
             }
             let info = " 已连续签到： " + days + " ; 今日排名： " + rank + " 位； 签到总天数： " + allDays + " ；";
             host.message = host.message + info;
-            host.reward = reward;
+            host.reward = days;
             console.log(host.name, info)
         })
         .catch((error) => {
@@ -263,7 +263,7 @@ async function getCheckinInfo(host) {
             let rank = $('#qiandaobtnnum').val();// 签到排名
             let info = " 本次签到奖励： " + reward + " 个币； 已连续签到： " + days + " 天; 今日排名： " + rank + " 位； 签到总天数： " + allDays + " 天；";
             host.message = host.message + info;
-            host.reward = reward;
+            host.reward = days;
             console.log(host.name, info)
         })
         .catch((error) => {
@@ -347,22 +347,7 @@ async function start() {
     let checkIn = false;
     console.log("配置的打卡的服务", needCheckHost);
     const needCheck = needCheckHost ? needCheckHost : "hao4k";
-    if (needCheck.indexOf("4ksj") !== -1) {
-        if (!checkIn) {
-            checkIn = true;
-            status = "";
-            message = "";
-        }
-        let sj = new HostInfo("4K视界", SJUrl, SJHeaders);
-        await getFormHashSJ(sj);
-        status += "SJ" + ":";
-        if (sj.status) {
-            status += sj.reward + "K币！";
-        } else {
-            status += "失败！";
-        }
-        message += "* " + sj.name + ": " + sj.message + "<br>";
-    }
+
     if (needCheck.indexOf("hao4k") !== -1) {
         if (!checkIn) {
             checkIn = true;
@@ -373,11 +358,28 @@ async function start() {
         await getFormHash(hao4k);
         status += "4K" + ":";
         if (hao4k.status) {
-            status += hao4k.reward + "H币！";
+            status += hao4k.reward + "天！";
         } else {
             status += "失败！";
         }
         message += "* " + hao4k.name + ": " + hao4k.message + "<br>";
+    }
+    
+        if (needCheck.indexOf("4ksj") !== -1) {
+        if (!checkIn) {
+            checkIn = true;
+            status = "";
+            message = "";
+        }
+        let sj = new HostInfo("4K视界", SJUrl, SJHeaders);
+        await getFormHashSJ(sj);
+        status += "SJ" + ":";
+        if (sj.status) {
+            status += sj.reward + "天！";
+        } else {
+            status += "失败！";
+        }
+        message += "* " + sj.name + ": " + sj.message + "<br>";
     }
     console.log(status, message);
     pushNotice(status, message);
