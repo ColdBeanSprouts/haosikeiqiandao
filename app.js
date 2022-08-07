@@ -236,7 +236,7 @@ async function getCheckinInfoSJ(host) {
             if (rank && rank.indexOf('\n') !== -1) {
                 rank = rank.replace(/\n/g, '');
             }
-            let info = " 已连续签到： " + days + " ; 今日排名： " + rank + " 位； 签到总天数： " + allDays + " ；";
+            let info = " 本次签到奖励： " + reward + " 个币； 已连续签到： " + days + " ; 今日排名： " + rank + " 位； 签到总天数： " + allDays + " ；";
             host.message = host.message + info;
             host.reward = days;
             console.log(host.name, info)
@@ -375,7 +375,7 @@ async function start() {
         await getFormHashSJ(sj);
         status += "SJ" + ":";
         if (sj.status) {
-            status += sj.reward + "天！";
+            status += sj.reward + "！";
         } else {
             status += "失败！";
         }
