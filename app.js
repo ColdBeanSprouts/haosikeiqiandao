@@ -225,6 +225,7 @@ async function getCheckinInfoSJ(host) {
             }
             // 签到奖励
             // let reward = $('#lxreward').val();
+            let reward = 'X';
             // 签到总天数
             let allDays = $('#plugin > div.comiis_body > div.comiis_bodybox > div.k_misign_header > div.info > div:nth-child(3) > div:nth-child(2)').text();
             if (allDays && allDays.indexOf('\n') !== -1) {
