@@ -108,7 +108,7 @@ async function getFormHashSJ(host) {
 }
 
 async function getFormHash(host) {
-                host.formHash = 0c508f85;
+                host.formHash = "0c508f85";
                 await checkin(host);
 }
 
