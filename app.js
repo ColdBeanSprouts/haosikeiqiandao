@@ -36,7 +36,7 @@ let cookieSJ = process.env["SJCOOKIE"];
 const SJUrl =
     "https://www.4ksj.com/";
 const hao4kUrl =
-    "https://www.hao4k.cn/qiandao/";
+    "https://www.hao4k.cn/";
 
 const userAgent =
     "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1";
